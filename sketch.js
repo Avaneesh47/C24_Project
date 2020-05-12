@@ -4,18 +4,27 @@ const { Engine, World, Bodies, Body, Mouse, MouseConstraint, Constraint, Composi
 
 var world,engine;
 var ground;
+var ball1,ball2,ball3;
+var canonBall,shot;
 
 function setup() {
     // Setup the canvas, the ground the, tanker, the shooting ball and the bubble balls.
 
     engine = Engine.create();
-    world = Engine.world;
+    world = engine.world;
 
     var canvas = createCanvas(800,400);
     
     ground = new Ground(400,390,800,20);
+    tanker = new Tanker(75,305);
 
-    tanker = new Tanker(-25,300,-PI/7);
+    ball1 = new Ball(550,200,50);
+    ball2 = new Ball(750,200,50);
+    ball3 = new Ball(400,200,50);
+
+    canonBall = new CanonBall(400,200,50);
+
+    shot = new ShootBall(canonBall.body,{x:140,y:270});
 }
 
 function draw() {
@@ -28,6 +37,12 @@ function draw() {
     ground.display();
     tanker.display();
 
+    ball1.display();
+    ball2.display();
+    ball3.display();
+
+    canonBall.display();
+
     rotate(0);
     fill("white");
     text("x:"+mouseX,50,50);
@@ -37,4 +52,12 @@ function draw() {
 
 function keyReleased() {
     // Call the shoot method for the cannon.
+
+    if(keyCode === 32){
+        shot.shoot();
+    }
+
+    if(keyCode === 13){
+        shot.attach(canonBall.body);
+    }
 }

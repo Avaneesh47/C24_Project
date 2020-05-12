@@ -1,25 +1,20 @@
 class Tanker {
-  constructor(x,y,angle) {
+  constructor(x,y) {
     var options = {
     isStatic: true
     }
-    this.body = Bodies.rectangle(x,y,50,20);
+    this.body = Bodies.rectangle(x,y,150,150,options);
     this.x = x;
     this.y = y;
-    Matter.Body.setAngle(this.body,angle);
+    this.image = loadImage("assets/tank.jpg");
+    World.add(world,this.body);
   };
 
     display(){
       var pos = this.body.position;
       push();
-      rotate(this.body.angle);
-      fill("orange");
-      rectMode(CENTER);
-      rect(pos.x,pos.y,50,20);
+      imageMode(CENTER);
+      image(this.image,pos.x,pos.y,150,150);
       pop();
-      fill("red");
-      rectMode(CENTER);
-      rect(80,350,100,50);
-      triangle(30,325,130,325,80,265);
     };
 }
