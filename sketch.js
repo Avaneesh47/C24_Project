@@ -22,7 +22,7 @@ function setup() {
     ball2 = new Ball(750,200,50);
     ball3 = new Ball(400,200,50);
 
-    canonBall = new CanonBall(400,200,50);
+    canonBall = new CanonBall(140,270);
 
     shot = new ShootBall(canonBall.body,{x:140,y:270});
 }
@@ -55,6 +55,7 @@ function keyReleased() {
 
     if(keyCode === 32){
         shot.shoot();
+        Matter.Body.applyForce(canonBall.body,canonBall.body.position,{x:1000,y:-1});
     }
 
     if(keyCode === 13){
